@@ -1,18 +1,29 @@
+// Initiate Express
 const express = require('express');
-const app = express();
+const logger = require('morgan');
+const bodyParser = require('body-parser'); // middleware
 
+const app = express();
+const PORT = 3000;
+
+// View engine setup
 app.set('view engine', 'ejs');
 
-app.get("/login", (req, res) => {
-    res.render("login");
-  });
+// Pakai middleware
+app.use(logger('dev'));
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: false }));
 
-//   app.get("/home", (req, res) => {
-//     res.render("home");
-//   });
+// Routes sbg middleware
+const routes = require('./routes/routesIndex');
+const login = require('./routes/routesLogin');
+const employees = require('./routes/routesEmployees');
 
+app.use('/', routes);
+app.use('/login', login);
+app.use('/api/employees', employees);
 
-// Servernya
-app.listen(3000, () => {
-    console.log("Server is running properly")
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`)
 });

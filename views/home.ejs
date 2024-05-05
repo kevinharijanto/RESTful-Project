@@ -6,6 +6,29 @@
     <title>ASTROSERVICE</title>
   </head>
   <body>
-    <h1>Welcome to ASTROSERVICE!</h1>
+    <h1> <%= title %> </h1>
+
+    <table class="table table-hover">
+      <thead class="thead-light"></thead>
+        <tr>
+            <th>Name</th>
+            <th>URL</th>
+            <th>Method</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i = 0; i < apis.length;  i++) { %>
+          <tr>
+            <td><%= apis[i].name %></td>
+            <td><%= apis[i].url %> </td>
+            <td><%= apis[i].method %> </td>
+          </tr>    
+        <% } %>
+      </tbody>
+    </table>
+
+    <!-- link to login page-->
+    <a href="/login">Please Login Here!</a>
   </body>
 </html>
+
